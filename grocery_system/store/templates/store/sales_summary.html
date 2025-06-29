@@ -1,0 +1,60 @@
+{% extends 'store/dashboard.html' %}
+{% block content %}
+<div class="card">
+  <h2 class="title">📈 Sales & Profit Summary</h2>
+  <div class="flex-row">
+    <div><strong>Total Sales:</strong> ₹{{ total_sales }}</div>
+    <div><strong>Total Profit:</strong> ₹{{ total_profit }}</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>🧾 Orders</h3>
+  {% if orders %}
+  <form method="get" class="search-filter-form">
+  <input type="text" name="q" placeholder="Search by employee..." value="{{ query }}">
+  <select name="order_by">
+    <option value="-date" {% if order_by == '-date' %}selected{% endif %}>Latest First</option>
+    <option value="date" {% if order_by == 'date' %}selected{% endif %}>Oldest First</option>
+    <option value="total_amount" {% if order_by == 'total_amount' %}selected{% endif %}>Amount Low to High</option>
+    <option value="-total_amount" {% if order_by == '-total_amount' %}selected{% endif %}>Amount High to Low</option>
+  </select>
+  <button type="submit">Apply</button>
+</form>
+  <div class="table-container">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Employee</th>
+          <th>Total</th>
+          <th>Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.date|date:"Y-m-d H:i" }}</td>
+          <td>{{ order.customer.username }}</td>
+          <td>{{ order.employee.user.username }}</td>
+          <td>₹{{ order.total_amount }}</td>
+          <td>
+            <ul>
+              {% for item in order.items.all %}
+              <li>{{ item.product.name }} × {{ item.quantity }} = ₹{{ item.subtotal }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>No sales records found.</p>
+  {% endif %}
+</div>
+{% endblock %}

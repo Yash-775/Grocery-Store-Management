@@ -1,0 +1,48 @@
+{% extends 'store/dashboard.html' %}
+{% block content %}
+<div class="card">
+  <h2 class="title">📦 Manage Stock</h2>
+  <div style="margin-bottom: 10px;">
+    <a href="{% url 'add_product' %}" class="btn">➕ Add New Product</a>
+  </div>
+  <form method="get" class="search-filter-form">
+  <input type="text" name="q" placeholder="Search product..." value="{{ query }}">
+  <select name="order_by">
+    <option value="name" {% if order_by == 'name' %}selected{% endif %}>Name A-Z</option>
+    <option value="-name" {% if order_by == '-name' %}selected{% endif %}>Name Z-A</option>
+    <option value="quantity" {% if order_by == 'quantity' %}selected{% endif %}>Low to High Stock</option>
+    <option value="-quantity" {% if order_by == '-quantity' %}selected{% endif %}>High to Low Stock</option>
+  </select>
+  <button type="submit">Apply</button>
+</form>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price (₹)</th>
+        <th>Cost Price (₹)</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.cost_price }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>
+          <form action="{% url 'delete_product' product.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete">🗑 Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

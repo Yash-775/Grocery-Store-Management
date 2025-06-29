@@ -1,0 +1,51 @@
+{% extends 'store/dashboard.html' %}
+{% block content %}
+<div class="card">
+  <h2 class="title">👥 Employee List</h2>
+
+  <a href="{% url 'add_employee' %}" class="btn">➕ Add New Employee</a>
+  <br>
+  <br>
+  <form method="get" class="search-filter-form">
+  <input type="text" name="q" placeholder="Search employee..." value="{{ query }}">
+  <select name="order_by">
+    <option value="user__username" {% if order_by == 'user__username' %}selected{% endif %}>Name A-Z</option>
+    <option value="-user__username" {% if order_by == '-user__username' %}selected{% endif %}>Name Z-A</option>
+    <option value="role" {% if order_by == 'role' %}selected{% endif %}>Role A-Z</option>
+    <option value="-role" {% if order_by == '-role' %}selected{% endif %}>Role Z-A</option>
+  </select>
+  <button type="submit">Apply</button>
+</form>
+
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employee in employees %}
+        <tr>
+          <td>{{ employee.user.username }}</td>
+          <td>{{ employee.role }}</td>
+          <td>
+            <form method="POST" action="{% url 'delete_employee' employee.id %}" onsubmit="return confirm('Are you sure?');">
+              {% csrf_token %}
+              <button class="delete-btn">🗑️ Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3">No employees found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

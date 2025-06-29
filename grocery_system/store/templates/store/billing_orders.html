@@ -1,0 +1,49 @@
+{% extends 'store/dashboard.html' %}
+{% block content %}
+<h2>🧾 Recent Orders</h2>
+<form method="get" class="search-filter-form">
+  <input type="text" name="q" placeholder="Search customer/employee..." value="{{ query }}">
+  <select name="order_by">
+    <option value="-date" {% if order_by == '-date' %}selected{% endif %}>Latest First</option>
+    <option value="date" {% if order_by == 'date' %}selected{% endif %}>Oldest First</option>
+    <option value="total_amount" {% if order_by == 'total_amount' %}selected{% endif %}>Amount Low to High</option>
+    <option value="-total_amount" {% if order_by == '-total_amount' %}selected{% endif %}>Amount High to Low</option>
+  </select>
+  <button type="submit">Apply</button>
+</form>
+
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Employee</th>
+      <th>Total Amount</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>#{{ order.id }}</td>
+      <td>
+        {% if order.customer %}
+        {{ order.customer.name }}
+        {% else %}
+        Walk-in
+        {% endif %}
+      </td>
+      <td>{{ order.date }}</td>
+      <td>{{ order.employee.user.username }}</td>
+      <td>₹{{ order.total_amount }}</td>
+      <td>
+        <a class="btn" href="{% url 'print_order_invoice' order.id %}" target="_blank">🖨️ Print Receipt</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No orders found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

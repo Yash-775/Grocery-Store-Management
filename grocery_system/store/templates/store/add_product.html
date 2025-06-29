@@ -1,0 +1,40 @@
+{% extends 'store/dashboard.html' %}
+{% block content %}
+<div class="card">
+  <h2 class="title">➕ Add New Product</h2>
+  <form method="POST" class="form">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="name">Product Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select name="category" id="category" required>
+        {% for category in categories %}
+          <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Selling Price (₹)</label>
+      <input type="number" id="price" name="price" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cost_price">Cost Price (₹)</label>
+      <input type="number" id="cost_price" name="cost_price" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" required>
+    </div>
+
+    <button type="submit" class="btn">✅ Add Product</button>
+  </form>
+</div>
+{% endblock %}

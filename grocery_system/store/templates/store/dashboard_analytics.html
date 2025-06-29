@@ -1,0 +1,98 @@
+{% extends 'store/base.html' %}
+{% block title %}Dashboard Analytics{% endblock %}
+{% block content %}
+<h2>📊 Dashboard Analytics</h2>
+
+<div class="card flex-row">
+  <div><strong>Total Products:</strong> {{ total_products }}</div>
+  <div><strong>Total Sales:</strong> ₹{{ total_sales }}</div>
+  <div><strong>Total Profit:</strong> ₹{{ total_profit }}</div>
+</div>
+
+<div class="card">
+  <h3>⚠️ Low Stock Items</h3>
+  <ul>
+    {% for item in low_stock_items %}
+      <li>{{ item.name }} ({{ item.quantity }} left)</li>
+    {% empty %}
+      <li>No low-stock items.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="card">
+  <h3>📦 Product Category Distribution</h3>
+  <div class="chart-container small-chart">
+    <canvas id="categoryChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <h3>📅 Weekly Sales</h3>
+  <div class="chart-container small-chart">
+    <canvas id="salesChart"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const categoryData = {{ category_data|safe }};
+  const weeklySales = {{ weekly_sales|safe }};
+
+  const categoryLabels = categoryData.map(item => item.name);
+  const categoryCounts = categoryData.map(item => item.count);
+
+  const salesLabels = weeklySales.map(item => item.date);
+  const salesTotals = weeklySales.map(item => item.total);
+
+  const categoryChart = new Chart(document.getElementById('categoryChart'), {
+    type: 'pie',
+    data: {
+      labels: categoryLabels,
+      datasets: [{
+        label: 'Products',
+        data: categoryCounts,
+        backgroundColor: ['#2196f3', '#f44336', '#4caf50', '#ff9800'],
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 1.5, // 1.5 = width is 1.5x height
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+
+  const salesChart = new Chart(document.getElementById('salesChart'), {
+    type: 'bar',
+    data: {
+      labels: salesLabels,
+      datasets: [{
+        label: 'Sales (₹)',
+        data: salesTotals,
+        backgroundColor: '#2196f3'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 1.7,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+});
+</script>
+<script>
+console.log("Category Data:", {{ category_data|safe }});
+console.log("Weekly Sales:", {{ weekly_sales|safe }});
+</script>
+{% endblock %}

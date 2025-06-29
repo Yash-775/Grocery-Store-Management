@@ -1,0 +1,413 @@
+:root {
+  --bg-color: #f4f6f8;
+  --text-color: #333;
+  --nav-bg: #2c3e50;
+  --nav-text: #fff;
+  --card-bg: #fff;
+  --btn-bg: #2196f3;
+  --btn-text: #fff;
+}
+
+.dark-mode {
+  --bg-color: #1e1e1e;
+  --text-color: #eee;
+  --nav-bg: #111;
+  --nav-text: #ddd;
+  --card-bg: #2a2a2a;
+  --btn-bg: #3a86ff;
+  --btn-text: #fff;
+}
+
+/* GENERAL LAYOUT */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2, h3 {
+  color: var(--text-color);
+}
+
+/* NAVIGATION */
+nav {
+  padding: 10px 20px;
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+}
+
+nav a {
+  color: var(--nav-text);
+  margin-right: 15px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* CARD STYLES */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: 20px 0;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* BUTTON STYLES */
+.btn {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #1976d2;
+}
+
+.btn-delete,
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-delete:hover,
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* TABLE STYLES */
+.table-container {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* FORM STYLES */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* 👇 Only add if spacing below button feels tight */
+.card .form button {
+  margin-top: 10px;
+}
+
+/* === THEME TOGGLE === */
+.theme-toggle {
+  float: right;
+  color: var(--nav-text);
+  font-size: 14px;
+  user-select: none;
+}
+
+.theme-toggle input {
+  margin-right: 5px;
+}
+
+/* DARK MODE TABLE */
+.dark-mode table {
+  background-color: #2a2a2a;
+  color: #eee;
+}
+
+.dark-mode th {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.dark-mode td {
+  color: #eee;
+}
+
+.dark-mode tr:nth-child(even) {
+  background-color: #333;
+}
+
+.dark-mode tr:hover {
+  background-color: #444;
+}
+
+.dark-mode .styled-table th,
+.dark-mode .styled-table td {
+  border-color: #444;
+}
+
+/* === Search & Filter Form Styling === */
+.search-filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.search-filter-form input[type="text"],
+.search-filter-form select {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.search-filter-form button {
+  padding: 10px 16px;
+  font-size: 15px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-filter-form button:hover {
+  background-color: #1976d2;
+}
+
+/* 🌞 Light/Dark Mode Support for Search & Filter Form */
+body.dark-mode .search-filter-form {
+  background-color: #2a2a2a;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .search-filter-form input[type="text"],
+body.dark-mode .search-filter-form select {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+body.dark-mode .search-filter-form input::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .search-filter-form button {
+  background-color: #0d6efd;
+}
+
+body.dark-mode .search-filter-form button:hover {
+  background-color: #0b5ed7;
+}
+
+/* ✅ Final Chart Styling */
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.small-chart {
+  /* Let Chart.js control height using aspectRatio */
+  padding: 10px;
+}
+
+.small-chart canvas {
+  display: block;
+  width: 100% !important;
+}
+/* === Auth Page Styling === */
+.auth-container, .auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-card {
+  background-color: var(--card-bg);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="password"],
+.auth-card input[type="email"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.auth-card button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.auth-card button:hover {
+  background-color: #1976d2;
+}
+
+.auth-card .form-group {
+  text-align: left;
+}
+
+.auth-card .form-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.auth-card .help-text,
+.auth-card .error-text {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.auth-card .error-text {
+  color: red;
+}
+
+.auth-card p.auth-footer {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-card a {
+  color: #2196f3;
+  text-decoration: none;
+}
+.auth-card a:hover {
+  text-decoration: underline;
+}
+/* For auth pages like login and register */
+.auth-page, .auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 3rem; /* Top-bottom 2rem, Left-right 3rem */
+  box-sizing: border-box;
+}
+
+.auth-card {
+  background-color: var(--card-bg);  /* ✅ Fix */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  color: var(--text-color);
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="password"],
+.auth-card input[type="email"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;  /* ✅ Add this line */
+}
+* {
+  box-sizing: border-box;
+}
+.auth-card .form-group label,
+.auth-card h2,
+.auth-card h3 {
+  color: var(--text-color);  /* ✅ use dynamic color */
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+

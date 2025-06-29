@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Grocery Admin{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'store/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    
+    {% if request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'register' %}
+    <nav>
+      <a href="{% url 'dashboard' %}">🏠 Dashboard Home</a>
+      <a href="{% url 'dashboard_analytics' %}">📊 Analytics</a>
+      <a href="{% url 'stock_list' %}">📦 Manage Stock</a>
+      <a href="{% url 'employee_list' %}">👥 Employees</a>
+      <a href="{% url 'sales_summary' %}">📈 Sales</a>
+      <a href="{% url 'order_list' %}">🧾 View Bills / Orders</a>
+      <a href="{% url 'logout' %}">🚪 Logout</a>
+      <label class="theme-toggle">
+        <input type="checkbox" id="themeToggle">
+        🌙 Dark Mode
+      </label>
+    </nav>
+    <hr>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <script>
+  const toggle = document.getElementById('themeToggle');
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    toggle.checked = true;
+  }
+  toggle?.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  });
+  </script>
+</body>
+</html>
