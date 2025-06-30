@@ -7,13 +7,12 @@ from django.utils import timezone
 from datetime import timedelta
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from django.db.models.functions import TruncDate
-
 from .models import Product, Category, Employee, Order, OrderItem
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
 # ------------------------------
-# 🔐 Authentication Views
+# Authentication Views
 # ------------------------------
 
 def login_view(request):
@@ -44,7 +43,7 @@ def logout_view(request):
     return redirect('login')
 
 # ------------------------------
-# 🏠 Dashboard
+# Dashboard
 # ------------------------------
 
 @login_required
@@ -52,7 +51,7 @@ def dashboard(request):
     return render(request, 'store/dashboard.html')
 
 # ------------------------------
-# 📦 Stock Management
+# Stock Management
 # ------------------------------
 
 @login_required
@@ -102,7 +101,7 @@ def delete_product(request, product_id):
     return redirect('stock_list')
 
 # ------------------------------
-# 👥 Employee Management
+# Employee Management
 # ------------------------------
 
 @login_required
@@ -143,7 +142,7 @@ def delete_employee(request, emp_id):
     return redirect('employee_list')
 
 # ------------------------------
-# 📈 Sales Summary
+# Sales Summary
 # ------------------------------
 
 @login_required
@@ -174,7 +173,7 @@ def sales_summary(request):
     })
 
 # ------------------------------
-# 📊 Dashboard Analytics
+#  Dashboard Analytics
 # ------------------------------
 
 @login_required
@@ -193,13 +192,13 @@ def dashboard_analytics(request):
 
     low_stock_items = Product.objects.filter(quantity__lte=5)
 
-    # 📦 Category distribution
+    # Category distribution
     category_data = Product.objects.values('category__name').annotate(count=Sum('quantity'))
     category_data = [
         {"name": item['category__name'], "count": item['count']} for item in category_data
     ]
 
-    # 🗓️ Weekly Sales
+    #  Weekly Sales
     today = timezone.now()
     last_week = today - timedelta(days=7)
     recent_orders = Order.objects.filter(date__gte=last_week)
