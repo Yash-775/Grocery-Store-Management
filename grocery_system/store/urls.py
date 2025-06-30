@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views  # ✅ This is required!
+from . import views
 from .views import dashboard_analytics
 
 urlpatterns = [
