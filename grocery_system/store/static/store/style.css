@@ -165,7 +165,6 @@ tr:hover {
   font-size: 16px;
 }
 
-/* 👇 Only add if spacing below button feels tight */
 .card .form button {
   margin-top: 10px;
 }
@@ -271,7 +270,6 @@ body.dark-mode .search-filter-form button:hover {
   background-color: #0b5ed7;
 }
 
-/* ✅ Final Chart Styling */
 .chart-container {
   position: relative;
   width: 100%;
@@ -375,12 +373,12 @@ body.dark-mode .search-filter-form button:hover {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem 3rem; /* Top-bottom 2rem, Left-right 3rem */
+  padding: 2rem 3rem; 
   box-sizing: border-box;
 }
 
 .auth-card {
-  background-color: var(--card-bg);  /* ✅ Fix */
+  background-color: var(--card-bg); 
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -398,7 +396,7 @@ body.dark-mode .search-filter-form button:hover {
   border-radius: 8px;
   font-size: 16px;
   width: 100%;
-  box-sizing: border-box;  /* ✅ Add this line */
+  box-sizing: border-box; 
 }
 * {
   box-sizing: border-box;
@@ -406,7 +404,7 @@ body.dark-mode .search-filter-form button:hover {
 .auth-card .form-group label,
 .auth-card h2,
 .auth-card h3 {
-  color: var(--text-color);  /* ✅ use dynamic color */
+  color: var(--text-color);
   font-weight: 500;
   margin-bottom: 5px;
 }
