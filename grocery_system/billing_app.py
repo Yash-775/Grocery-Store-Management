@@ -4,12 +4,11 @@ import django
 import os
 import sys
 
-# Set up Django environment
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "grocery_system.settings")
 django.setup()
 
-from store.models import Product, Order, OrderItem, Employee, Customer  # include Customer
+from store.models import Product, Order, OrderItem, Employee, Customer  
 
 class BillingApp:
     def __init__(self, root):
@@ -91,7 +90,7 @@ class BillingApp:
             return
 
         customer, _ = Customer.objects.get_or_create(name=customer_name)
-        employee = Employee.objects.first()  # You may improve this with session handling later
+        employee = Employee.objects.first() 
 
         order = Order.objects.create(customer=customer, employee=employee, total_amount=self.total_amount)
 
